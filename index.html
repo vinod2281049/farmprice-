@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinod Kumar Smart Irrigation</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f8f3;
+  color: #17351f;
+}
+
+header {
+  background: #168044;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin-top: 8px;
+}
+
+.container {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px #00000015;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.box {
+  background: #eef8f0;
+  padding: 18px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.value {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.status {
+  padding: 15px;
+  text-align: center;
+  border-radius: 12px;
+  background: #fff4d6;
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #168044;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #66756b;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌱 Vinod Kumar Smart Irrigation</h1>
+  <p>Smart Water Management for Farmers</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>💧 Irrigation Dashboard</h2>
+
+    <div class="dashboard">
+
+      <div class="box">
+        🌱
+        <div>Soil Moisture</div>
+        <div class="value" id="moisture">35%</div>
+      </div>
+
+      <div class="box">
+        🌡️
+        <div>Temperature</div>
+        <div class="value" id="temperature">28°C</div>
+      </div>
+
+      <div class="box">
+        💦
+        <div>Water Tank</div>
+        <div class="value" id="tank">72%</div>
+      </div>
+
+      <div class="box">
+        ⚙️
+        <div>Pump</div>
+        <div class="value" id="pump">OFF</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🤖 Automatic Irrigation</h2>
+
+    <div class="status" id="status">
+      Soil is dry. Pump should be ON.
+    </div>
+
+    <button onclick="checkIrrigation()">
+      Check Irrigation
+    </button>
+
+    <button onclick="togglePump()">
+      Manually Toggle Pump
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>💡 How Smart Irrigation Works</h2>
+
+    <p>1️⃣ Soil moisture sensor checks the soil.</p>
+    <p>2️⃣ If the soil becomes dry, the pump turns ON.</p>
+    <p>3️⃣ When enough moisture is available, the pump turns OFF.</p>
+    <p>4️⃣ This helps reduce unnecessary water usage.</p>
+  </div>
+
+  <div class="card">
+    <h2>🚜 Future Features</h2>
+
+    <p>📱 Mobile monitoring</p>
+    <p>🌦️ Weather information</p>
+    <p>📊 Moisture history</p>
+    <p>🤖 Automatic pump control</p>
+    <p>🌐 IoT connection using ESP32</p>
+  </div>
+
+</div>
+
+<footer>
+  Vinod Kumar Smart Irrigation<br>
+  College Innovation & Design Thinking Project
+</footer>
+
+<script>
+
+let moisture = 35;
+let pump = false;
+
+function checkIrrigation() {
+
+  moisture = Math.floor(Math.random() * 70) + 15;
+
+  document.getElementById("moisture").innerText =
+    moisture + "%";
+
+  if (moisture < 40) {
+
+    pump = true;
+
+    document.getElementById("pump").innerText = "ON";
+
+    document.getElementById("status").innerText =
+      "🌱 Soil is dry → Pump ON 💧";
+
+  } else {
+
+    pump = false;
+
+    document.getElementById("pump").innerText = "OFF";
+
+    document.getElementById("status").innerText =
+      "🌿 Soil has enough moisture → Pump OFF";
+
+  }
+}
+
+function togglePump() {
+
+  pump = !pump;
+
+  if (pump) {
+
+    document.getElementById("pump").innerText = "ON";
+
+    document.getElementById("status").innerText =
+      "💧 Pump manually turned ON";
+
+  } else {
+
+    document.getElementById("pump").innerText = "OFF";
+
+    document.getElementById("status").innerText =
+      "🛑 Pump manually turned OFF";
+
+  }
+}
+
+</script>
+
+</body>
+</html>
