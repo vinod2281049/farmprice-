@@ -419,3 +419,17 @@ slider.addEventListener("input", function() {
 </div>
 </body>
 </html>
+function calculateWater() {
+  const area = Number(document.getElementById("farmArea").value);
+
+  if (area <= 0) {
+    document.getElementById("waterResult").innerText =
+      "⚠️ Please enter a valid farm area.";
+    return;
+  }
+
+  const waterSaved = area * 1000;
+
+  document.getElementById("waterResult").innerText =
+    "💧 Estimated water saving: " + waterSaved + " litres";
+}
