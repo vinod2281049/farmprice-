@@ -245,7 +245,43 @@ function togglePump() {
 
   }
 }
+function smartRecommendation() {
+  const moistureText = document.getElementById("moistureValue");
 
+  if (!moistureText) return;
+
+  const moisture = parseInt(moistureText.innerText);
+
+  let message = "";
+
+  if (moisture < 30) {
+    message = "🔴 Soil is very dry — irrigation is recommended.";
+  } else if (moisture <= 50) {
+    message = "🟡 Soil moisture is moderate — monitor the soil.";
+  } else {
+    message = "🟢 Soil has enough moisture — irrigation is not needed.";
+  }
+
+  let box = document.getElementById("smartRecommendation");
+
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "smartRecommendation";
+    box.style.padding = "20px";
+    box.style.marginTop = "20px";
+    box.style.borderRadius = "15px";
+    box.style.background = "#eaf7ed";
+    box.style.fontSize = "18px";
+    box.style.fontWeight = "bold";
+
+    document.querySelector(".container").appendChild(box);
+  }
+
+  box.innerHTML = "🤖 Smart Watering Recommendation<br><br>" + message;
+}
+
+setInterval(smartRecommendation, 1000);
+smartRecommendation();
 </script>
 
 </body>
