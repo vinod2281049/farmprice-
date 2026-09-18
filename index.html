@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vinod Kumar Smart Irrigation</title>
+<title>Smart Irrigation - Vinod Kumar</title>
 
 <style>
 * {
@@ -22,12 +22,16 @@ header {
   background: linear-gradient(135deg, #116530, #35a854);
   color: white;
   text-align: center;
-  padding: 28px 15px;
+  padding: 30px 15px;
 }
 
 header h1 {
   margin: 0;
   font-size: 28px;
+}
+
+header p {
+  margin-bottom: 0;
 }
 
 .container {
@@ -42,6 +46,10 @@ header h1 {
   margin-bottom: 18px;
   border-radius: 16px;
   box-shadow: 0 4px 15px #00000012;
+}
+
+h2 {
+  margin-top: 0;
 }
 
 .dashboard {
@@ -68,14 +76,17 @@ label {
   margin: 12px 0 8px;
 }
 
-input, select, button {
+input,
+select,
+button {
   width: 100%;
   padding: 13px;
   border-radius: 10px;
   font-size: 16px;
 }
 
-input, select {
+input,
+select {
   border: 1px solid #b8d4bf;
 }
 
@@ -85,6 +96,11 @@ button {
   color: white;
   font-weight: bold;
   margin-top: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0d5e2b;
 }
 
 .recommendation {
@@ -92,12 +108,18 @@ button {
   border-radius: 12px;
   background: #eaf7ed;
   font-size: 18px;
-  font-weight: bold;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .info {
   line-height: 1.6;
+}
+
+canvas {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #d7e8db;
+  border-radius: 10px;
 }
 
 footer {
@@ -128,6 +150,7 @@ footer {
 
 <div class="container">
 
+  <!-- FARM DASHBOARD -->
   <div class="card">
     <h2>📊 Farm Dashboard</h2>
 
@@ -157,10 +180,11 @@ footer {
   </div>
 
 
+  <!-- IRRIGATION CONTROL -->
   <div class="card">
     <h2>💧 Irrigation Control</h2>
 
-    <label>Select Crop</label>
+    <label for="crop">Select Crop</label>
 
     <select id="crop">
       <option>Tomato</option>
@@ -172,7 +196,9 @@ footer {
       <option>Vegetables</option>
     </select>
 
-    <label>Simulate Soil Moisture</label>
+    <label for="moistureSlider">
+      🌱 Simulate Soil Moisture
+    </label>
 
     <input
       type="range"
@@ -182,77 +208,128 @@ footer {
       value="40"
     >
 
-    <p>Move the slider to simulate soil moisture.</p>
+    <p>
+      Soil moisture:
+      <strong id="sliderText">40%</strong>
+    </p>
 
-    <button onclick="turnPumpOn()">🚰 Turn Pump ON</button>
+    <button type="button" id="pumpOnBtn">
+      🚰 Turn Pump ON
+    </button>
 
-    <button onclick="turnPumpOff()">⛔ Turn Pump OFF</button>
-
+    <button type="button" id="pumpOffBtn">
+      ⛔ Turn Pump OFF
+    </button>
   </div>
 
 
+  <!-- RECOMMENDATION -->
   <div class="card">
-
     <h2>🤖 Smart Watering Recommendation</h2>
 
     <div id="recommendation" class="recommendation">
       Checking soil moisture...
     </div>
-<div id="dryAlert" style="
-  margin-top:15px;
-  padding:15px;
-  border-radius:10px;
-  background:#ffe0e0;
-  color:#a00000;
-  font-weight:bold;
-  display:none;
-">
-  🔴 ALERT: Soil is very dry! Please start irrigation.
-</div>
   </div>
-<div class="card">
-  <h2>📈 Soil Moisture History</h2>
 
-  <canvas id="moistureChart" width="400" height="200"></canvas>
-</div>
-<div class="card">
-  <h2>🌦️ Weather & Farm Conditions</h2>
 
-  <div class="dashboard">
-
-    <div class="box">
-      <p>🌡️ Temperature</p>
-      <h3>28°C</h3>
-    </div>
-
-    <div class="box">
-      <p>💧 Humidity</p>
-      <h3>65%</h3>
-    </div>
-
-    <div class="box">
-      <p>🌧️ Rainfall</p>
-      <h3>20%</h3>
-    </div>
-
-    <div class="box">
-      <p>☀️ Weather</p>
-      <h3>Sunny</h3>
-    </div>
-
-  </div>
-</div>
+  <!-- WEATHER -->
   <div class="card">
+    <h2>🌦️ Weather & Farm Conditions</h2>
 
+    <div class="dashboard">
+
+      <div class="box">
+        <p>🌡️ Temperature</p>
+        <h3>28°C</h3>
+      </div>
+
+      <div class="box">
+        <p>💧 Humidity</p>
+        <h3>65%</h3>
+      </div>
+
+      <div class="box">
+        <p>🌧️ Rainfall</p>
+        <h3>20%</h3>
+      </div>
+
+      <div class="box">
+        <p>☀️ Weather</p>
+        <h3>Sunny</h3>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- GRAPH -->
+  <div class="card">
+    <h2>📈 Soil Moisture History</h2>
+
+    <canvas id="moistureChart" width="700" height="300"></canvas>
+  </div>
+
+
+  <!-- WATER SAVING CALCULATOR -->
+  <div class="card">
+    <h2>💧 Water-Saving Calculator</h2>
+
+    <label for="farmArea">
+      Farm Area (acres)
+    </label>
+
+    <input
+      type="number"
+      id="farmArea"
+      min="0"
+      step="0.1"
+      placeholder="Example: 2"
+    >
+
+    <button type="button" id="calculateBtn">
+      Calculate Water Saving
+    </button>
+
+    <p
+      id="waterResult"
+      style="
+        margin-top:15px;
+        font-size:18px;
+        font-weight:bold;
+      "
+    ></p>
+  </div>
+
+
+  <!-- SYSTEM INFORMATION -->
+  <div class="card">
+    <h2>⚙️ System Information</h2>
+
+    <div class="info">
+      <p>✅ Soil moisture can be monitored continuously.</p>
+      <p>✅ Dry soil can trigger irrigation recommendations.</p>
+      <p>✅ The pump can be controlled using the buttons.</p>
+      <p>✅ The calculator gives a demo estimate of water saving.</p>
+    </div>
+  </div>
+
+
+  <!-- INNOVATION -->
+  <div class="card">
     <h2>💡 Innovation</h2>
 
     <p class="info">
-      This Smart Irrigation system helps farmers reduce water wastage,
-      save time, and provide water according to soil moisture.
-      In the future, this system can be connected to an ESP32,
-      soil moisture sensor, relay module, and water pump.
+      Smart Irrigation uses soil moisture information to help farmers
+      provide water when crops need it. This can reduce unnecessary
+      water usage, save time, and improve irrigation management.
     </p>
 
+    <p class="info">
+      In the future, this project can be connected to an
+      <strong>ESP32, soil moisture sensor, relay module and water pump</strong>
+      to create a real IoT-based irrigation system.
+    </p>
   </div>
 
 </div>
@@ -270,62 +347,110 @@ let moisture = 40;
 let tank = 75;
 let pump = false;
 
+const slider =
+  document.getElementById("moistureSlider");
 
-const slider = document.getElementById("moistureSlider");
+const moistureValue =
+  document.getElementById("moistureValue");
+
+const sliderText =
+  document.getElementById("sliderText");
+
+const pumpValue =
+  document.getElementById("pumpValue");
+
+const tankValue =
+  document.getElementById("tankValue");
+
+const recommendation =
+  document.getElementById("recommendation");
+
+const pumpOnBtn =
+  document.getElementById("pumpOnBtn");
+
+const pumpOffBtn =
+  document.getElementById("pumpOffBtn");
+
+const calculateBtn =
+  document.getElementById("calculateBtn");
+
+const farmArea =
+  document.getElementById("farmArea");
+
+const waterResult =
+  document.getElementById("waterResult");
+
+
+/* =========================
+   MOISTURE
+========================= */
 
 slider.addEventListener("input", function() {
 
   moisture = Number(slider.value);
 
-  document.getElementById("moistureValue").innerText =
+  moistureValue.innerText =
+    moisture + "%";
+
+  sliderText.innerText =
     moisture + "%";
 
   updateRecommendation();
 
+  addHistory();
+
+  drawChart();
 });
 
 
-function updateRecommendation() {
+/* =========================
+   RECOMMENDATION
+========================= */
 
-  const box = document.getElementById("recommendation");
+function updateRecommendation() {
 
   if (moisture < 30) {
 
-    box.innerHTML =
-      "🔴 Soil is very dry.<br>💧 Irrigation is recommended.";
+    recommendation.innerHTML =
+      "🔴 <strong>Soil is very dry.</strong><br>" +
+      "💧 Irrigation is recommended.";
 
   }
 
   else if (moisture <= 50) {
 
-    box.innerHTML =
-      "🟡 Soil moisture is moderate.<br>👀 Monitor the soil.";
+    recommendation.innerHTML =
+      "🟡 <strong>Soil moisture is moderate.</strong><br>" +
+      "👀 Monitor the soil.";
 
   }
 
   else {
 
-    box.innerHTML =
-      "🟢 Soil has enough moisture.<br>✅ Irrigation is not needed.";
+    recommendation.innerHTML =
+      "🟢 <strong>Soil has enough moisture.</strong><br>" +
+      "✅ Irrigation is not needed.";
 
   }
-
 }
 
 
-function turnPumpOn() {
+/* =========================
+   PUMP ON
+========================= */
+
+pumpOnBtn.addEventListener("click", function() {
 
   if (tank <= 0) {
 
     alert("Water tank is empty!");
 
     return;
-
   }
 
   pump = true;
 
-  document.getElementById("pumpValue").innerText = "ON";
+  pumpValue.innerText = "ON";
 
   tank = Math.max(0, tank - 1);
 
@@ -333,104 +458,195 @@ function turnPumpOn() {
 
   slider.value = moisture;
 
-  document.getElementById("moistureValue").innerText =
+  moistureValue.innerText =
     moisture + "%";
 
-  document.getElementById("tankValue").innerText =
+  sliderText.innerText =
+    moisture + "%";
+
+  tankValue.innerText =
     tank + "%";
 
   updateRecommendation();
 
-}
-
-
-function turnPumpOff() {
-
-  pump = false;
-
-  document.getElementById("pumpValue").innerText = "OFF";
-
-  updateRecommendation();
-
-}
-
-
-updateRecommendation();
-const chartCanvas = document.getElementById("moistureChart");
-const chart = chartCanvas.getContext("2d");
-
-let moistureHistory = [40];
-
-function drawChart() {
-  chart.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
-
-  chart.beginPath();
-  chart.moveTo(20, 180);
-
-  moistureHistory.forEach((value, index) => {
-    const x = 20 + index * 35;
-    const y = 180 - value * 1.5;
-
-    chart.lineTo(x, y);
-  });
-
-  chart.stroke();
-
-  chart.font = "14px Arial";
-  chart.fillText("Soil Moisture (%)", 20, 20);
-}
-
-slider.addEventListener("input", function() {
-  moistureHistory.push(moisture);
-
-  if (moistureHistory.length > 10) {
-    moistureHistory.shift();
-  }
+  addHistory();
 
   drawChart();
 });
 
-drawChart();
-const alertBox = document.getElementById("dryAlert");
 
-slider.addEventListener("input", function() {
-  if (moisture < 30) {
-    alertBox.style.display = "block";
-  } else {
-    alertBox.style.display = "none";
-  }
+/* =========================
+   PUMP OFF
+========================= */
+
+pumpOffBtn.addEventListener("click", function() {
+
+  pump = false;
+
+  pumpValue.innerText = "OFF";
+
 });
-</script>
-<div class="card">
-  <h2>💧 Water-Saving Calculator</h2>
 
-  <label>Farm Area (acres)</label>
-  <input type="number" id="farmArea" placeholder="Enter acres">
 
-  <button onclick="calculateWater()">
-    Calculate Water Saving
-  </button>
+/* =========================
+   WATER SAVING CALCULATOR
+========================= */
 
-  <p id="waterResult" style="
-    margin-top:15px;
-    font-size:18px;
-    font-weight:bold;
-  "></p>
-</div>
-</body>
-</html>
+calculateBtn.addEventListener("click", function() {
 
-document.getElementById("calculateBtn").addEventListener("click", function() {
-  const area = Number(document.getElementById("farmArea").value);
-  const result = document.getElementById("waterResult");
+  const area =
+    Number(farmArea.value);
 
-  if (area <= 0) {
-    result.innerText = "⚠️ Please enter a valid farm area.";
+  if (!area || area <= 0) {
+
+    waterResult.innerText =
+      "⚠️ Please enter a valid farm area.";
+
     return;
   }
 
-  const saving = area * 1000;
+  const saving =
+    area * 1000;
 
-  result.innerText =
-    "💧 Estimated water saving: " + saving + " litres";
+  waterResult.innerText =
+    "💧 Estimated water saving: " +
+    saving.toLocaleString() +
+    " litres";
+
 });
+
+
+/* =========================
+   MOISTURE GRAPH
+========================= */
+
+const canvas =
+  document.getElementById("moistureChart");
+
+const ctx =
+  canvas.getContext("2d");
+
+let moistureHistory = [40];
+
+
+function addHistory() {
+
+  moistureHistory.push(moisture);
+
+  if (moistureHistory.length > 12) {
+
+    moistureHistory.shift();
+
+  }
+}
+
+
+function drawChart() {
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  /* AXIS */
+
+  ctx.beginPath();
+
+  ctx.moveTo(40, 20);
+
+  ctx.lineTo(40, 260);
+
+  ctx.lineTo(680, 260);
+
+  ctx.stroke();
+
+
+  /* LABEL */
+
+  ctx.font =
+    "14px Arial";
+
+  ctx.fillText(
+    "Soil Moisture (%)",
+    50,
+    20
+  );
+
+
+  /* GRAPH LINE */
+
+  ctx.beginPath();
+
+
+  moistureHistory.forEach(
+    function(value, index) {
+
+      const x =
+        50 + index * 55;
+
+      const y =
+        250 - value * 2.1;
+
+
+      if (index === 0) {
+
+        ctx.moveTo(x, y);
+
+      } else {
+
+        ctx.lineTo(x, y);
+
+      }
+
+    }
+  );
+
+
+  ctx.stroke();
+
+
+  /* POINTS */
+
+  moistureHistory.forEach(
+    function(value, index) {
+
+      const x =
+        50 + index * 55;
+
+      const y =
+        250 - value * 2.1;
+
+
+      ctx.beginPath();
+
+      ctx.arc(
+        x,
+        y,
+        4,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+    }
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+updateRecommendation();
+
+drawChart();
+
+</script>
+
+</body>
+</html>
