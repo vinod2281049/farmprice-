@@ -320,7 +320,41 @@ function turnPumpOff() {
 
 
 updateRecommendation();
+const chartCanvas = document.getElementById("moistureChart");
+const chart = chartCanvas.getContext("2d");
 
+let moistureHistory = [40];
+
+function drawChart() {
+  chart.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+
+  chart.beginPath();
+  chart.moveTo(20, 180);
+
+  moistureHistory.forEach((value, index) => {
+    const x = 20 + index * 35;
+    const y = 180 - value * 1.5;
+
+    chart.lineTo(x, y);
+  });
+
+  chart.stroke();
+
+  chart.font = "14px Arial";
+  chart.fillText("Soil Moisture (%)", 20, 20);
+}
+
+slider.addEventListener("input", function() {
+  moistureHistory.push(moisture);
+
+  if (moistureHistory.length > 10) {
+    moistureHistory.shift();
+  }
+
+  drawChart();
+});
+
+drawChart();
 </script>
 
 </body>
