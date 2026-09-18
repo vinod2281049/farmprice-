@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Vinod Kumar Smart Irrigation</title>
 
 <style>
@@ -13,15 +14,15 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f8f3;
-  color: #17351f;
+  background: #f1f8f3;
+  color: #173b25;
 }
 
 header {
-  background: #168044;
+  background: linear-gradient(135deg, #116530, #35a854);
   color: white;
   text-align: center;
-  padding: 30px 15px;
+  padding: 28px 15px;
 }
 
 header h1 {
@@ -29,14 +30,10 @@ header h1 {
   font-size: 28px;
 }
 
-header p {
-  margin-top: 8px;
-}
-
 .container {
   max-width: 850px;
   margin: 20px auto;
-  padding: 15px;
+  padding: 0 15px;
 }
 
 .card {
@@ -44,64 +41,77 @@ header p {
   padding: 20px;
   margin-bottom: 18px;
   border-radius: 16px;
-  box-shadow: 0 4px 15px #00000015;
-}
-
-h2 {
-  margin-top: 0;
+  box-shadow: 0 4px 15px #00000012;
 }
 
 .dashboard {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 15px;
 }
 
 .box {
-  background: #eef8f0;
+  background: #eaf7ed;
   padding: 18px;
   text-align: center;
   border-radius: 12px;
 }
 
-.value {
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: 8px;
+.box h3 {
+  margin: 5px 0;
+  font-size: 27px;
 }
 
-.status {
-  padding: 15px;
-  text-align: center;
-  border-radius: 12px;
-  background: #fff4d6;
+label {
+  display: block;
   font-weight: bold;
+  margin: 12px 0 8px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+input, select {
+  border: 1px solid #b8d4bf;
 }
 
 button {
-  width: 100%;
-  padding: 14px;
   border: none;
-  border-radius: 10px;
-  background: #168044;
+  background: #16803c;
   color: white;
-  font-size: 17px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
-button:active {
-  transform: scale(0.98);
+.recommendation {
+  padding: 18px;
+  border-radius: 12px;
+  background: #eaf7ed;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.info {
+  line-height: 1.6;
 }
 
 footer {
   text-align: center;
   padding: 25px;
-  color: #66756b;
+  color: #56705d;
   font-size: 13px;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 23px;
+  }
+
   .dashboard {
     grid-template-columns: 1fr;
   }
@@ -113,175 +123,199 @@ footer {
 
 <header>
   <h1>🌱 Vinod Kumar Smart Irrigation</h1>
-  <p>Smart Water Management for Farmers</p>
+  <p>Smart water management for modern farming</p>
 </header>
 
 <div class="container">
 
   <div class="card">
-    <h2>💧 Irrigation Dashboard</h2>
+    <h2>📊 Farm Dashboard</h2>
 
     <div class="dashboard">
 
       <div class="box">
-        🌱
-        <div>Soil Moisture</div>
-        <div class="value" id="moisture">35%</div>
+        <p>🌱 Soil Moisture</p>
+        <h3 id="moistureValue">40%</h3>
       </div>
 
       <div class="box">
-        🌡️
-        <div>Temperature</div>
-        <div class="value" id="temperature">28°C</div>
+        <p>🌡️ Temperature</p>
+        <h3>28°C</h3>
       </div>
 
       <div class="box">
-        💦
-        <div>Water Tank</div>
-        <div class="value" id="tank">72%</div>
+        <p>💧 Water Tank</p>
+        <h3 id="tankValue">75%</h3>
       </div>
 
       <div class="box">
-        ⚙️
-        <div>Pump</div>
-        <div class="value" id="pump">OFF</div>
+        <p>🚰 Water Pump</p>
+        <h3 id="pumpValue">OFF</h3>
       </div>
 
     </div>
   </div>
 
-  <div class="card">
-    <h2>🤖 Automatic Irrigation</h2>
 
-    <div class="status" id="status">
-      Soil is dry. Pump should be ON.
+  <div class="card">
+    <h2>💧 Irrigation Control</h2>
+
+    <label>Select Crop</label>
+
+    <select id="crop">
+      <option>Tomato</option>
+      <option>Onion</option>
+      <option>Rice</option>
+      <option>Wheat</option>
+      <option>Groundnut</option>
+      <option>Sugarcane</option>
+      <option>Vegetables</option>
+    </select>
+
+    <label>Simulate Soil Moisture</label>
+
+    <input
+      type="range"
+      id="moistureSlider"
+      min="0"
+      max="100"
+      value="40"
+    >
+
+    <p>Move the slider to simulate soil moisture.</p>
+
+    <button onclick="turnPumpOn()">🚰 Turn Pump ON</button>
+
+    <button onclick="turnPumpOff()">⛔ Turn Pump OFF</button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>🤖 Smart Watering Recommendation</h2>
+
+    <div id="recommendation" class="recommendation">
+      Checking soil moisture...
     </div>
 
-    <button onclick="checkIrrigation()">
-      Check Irrigation
-    </button>
-
-    <button onclick="togglePump()">
-      Manually Toggle Pump
-    </button>
   </div>
 
-  <div class="card">
-    <h2>💡 How Smart Irrigation Works</h2>
-
-    <p>1️⃣ Soil moisture sensor checks the soil.</p>
-    <p>2️⃣ If the soil becomes dry, the pump turns ON.</p>
-    <p>3️⃣ When enough moisture is available, the pump turns OFF.</p>
-    <p>4️⃣ This helps reduce unnecessary water usage.</p>
-  </div>
 
   <div class="card">
-    <h2>🚜 Future Features</h2>
 
-    <p>📱 Mobile monitoring</p>
-    <p>🌦️ Weather information</p>
-    <p>📊 Moisture history</p>
-    <p>🤖 Automatic pump control</p>
-    <p>🌐 IoT connection using ESP32</p>
+    <h2>💡 Innovation</h2>
+
+    <p class="info">
+      This Smart Irrigation system helps farmers reduce water wastage,
+      save time, and provide water according to soil moisture.
+      In the future, this system can be connected to an ESP32,
+      soil moisture sensor, relay module, and water pump.
+    </p>
+
   </div>
 
 </div>
 
+
 <footer>
-  Vinod Kumar Smart Irrigation<br>
-  College Innovation & Design Thinking Project
+  Vinod Kumar Smart Irrigation |
+  Innovation & Design Thinking Project
 </footer>
+
 
 <script>
 
-let moisture = 35;
+let moisture = 40;
+let tank = 75;
 let pump = false;
 
-function checkIrrigation() {
 
-  moisture = Math.floor(Math.random() * 70) + 15;
+const slider = document.getElementById("moistureSlider");
 
-  document.getElementById("moisture").innerText =
+slider.addEventListener("input", function() {
+
+  moisture = Number(slider.value);
+
+  document.getElementById("moistureValue").innerText =
     moisture + "%";
 
-  if (moisture < 40) {
+  updateRecommendation();
 
-    pump = true;
+});
 
-    document.getElementById("pump").innerText = "ON";
 
-    document.getElementById("status").innerText =
-      "🌱 Soil is dry → Pump ON 💧";
+function updateRecommendation() {
 
-  } else {
-
-    pump = false;
-
-    document.getElementById("pump").innerText = "OFF";
-
-    document.getElementById("status").innerText =
-      "🌿 Soil has enough moisture → Pump OFF";
-
-  }
-}
-
-function togglePump() {
-
-  pump = !pump;
-
-  if (pump) {
-
-    document.getElementById("pump").innerText = "ON";
-
-    document.getElementById("status").innerText =
-      "💧 Pump manually turned ON";
-
-  } else {
-
-    document.getElementById("pump").innerText = "OFF";
-
-    document.getElementById("status").innerText =
-      "🛑 Pump manually turned OFF";
-
-  }
-}
-function smartRecommendation() {
-  const moistureText = document.getElementById("moistureValue");
-
-  if (!moistureText) return;
-
-  const moisture = parseInt(moistureText.innerText);
-
-  let message = "";
+  const box = document.getElementById("recommendation");
 
   if (moisture < 30) {
-    message = "🔴 Soil is very dry — irrigation is recommended.";
-  } else if (moisture <= 50) {
-    message = "🟡 Soil moisture is moderate — monitor the soil.";
-  } else {
-    message = "🟢 Soil has enough moisture — irrigation is not needed.";
+
+    box.innerHTML =
+      "🔴 Soil is very dry.<br>💧 Irrigation is recommended.";
+
   }
 
-  let box = document.getElementById("smartRecommendation");
+  else if (moisture <= 50) {
 
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "smartRecommendation";
-    box.style.padding = "20px";
-    box.style.marginTop = "20px";
-    box.style.borderRadius = "15px";
-    box.style.background = "#eaf7ed";
-    box.style.fontSize = "18px";
-    box.style.fontWeight = "bold";
+    box.innerHTML =
+      "🟡 Soil moisture is moderate.<br>👀 Monitor the soil.";
 
-    document.querySelector(".container").appendChild(box);
   }
 
-  box.innerHTML = "🤖 Smart Watering Recommendation<br><br>" + message;
+  else {
+
+    box.innerHTML =
+      "🟢 Soil has enough moisture.<br>✅ Irrigation is not needed.";
+
+  }
+
 }
 
-setInterval(smartRecommendation, 1000);
-smartRecommendation();
+
+function turnPumpOn() {
+
+  if (tank <= 0) {
+
+    alert("Water tank is empty!");
+
+    return;
+
+  }
+
+  pump = true;
+
+  document.getElementById("pumpValue").innerText = "ON";
+
+  tank = Math.max(0, tank - 1);
+
+  moisture = Math.min(100, moisture + 5);
+
+  slider.value = moisture;
+
+  document.getElementById("moistureValue").innerText =
+    moisture + "%";
+
+  document.getElementById("tankValue").innerText =
+    tank + "%";
+
+  updateRecommendation();
+
+}
+
+
+function turnPumpOff() {
+
+  pump = false;
+
+  document.getElementById("pumpValue").innerText = "OFF";
+
+  updateRecommendation();
+
+}
+
+
+updateRecommendation();
 
 </script>
 
