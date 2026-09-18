@@ -391,6 +391,15 @@ slider.addEventListener("input", function() {
 });
 
 drawChart();
+const alertBox = document.getElementById("dryAlert");
+
+slider.addEventListener("input", function() {
+  if (moisture < 30) {
+    alertBox.style.display = "block";
+  } else {
+    alertBox.style.display = "none";
+  }
+});
 </script>
 
 </body>
