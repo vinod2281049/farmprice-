@@ -149,6 +149,78 @@ footer {
 </header>
 
 <div class="container">
+<!-- FARM MARKET PRICES -->
+<div class="card">
+  <h2>📊 Farm Market Prices</h2>
+
+  <div class="dashboard">
+
+    <div class="box">
+      <p>🍅 Tomato</p>
+      <h3>₹30/kg</h3>
+    </div>
+
+    <div class="box">
+      <p>🧅 Onion</p>
+      <h3>₹35/kg</h3>
+    </div>
+
+    <div class="box">
+      <p>🥔 Potato</p>
+      <h3>₹28/kg</h3>
+    </div>
+
+    <div class="box">
+      <p>🥜 Groundnut</p>
+      <h3>₹70/kg</h3>
+    </div>
+
+  </div>
+
+  <p class="info">
+    ℹ️ Demo market prices for the hackathon prototype.
+  </p>
+</div>
+
+
+<!-- CROP PROFIT CALCULATOR -->
+<div class="card">
+  <h2>💰 Crop Profit Calculator</h2>
+
+  <label>Crop quantity (kg)</label>
+
+  <input
+    type="number"
+    id="cropQuantity"
+    placeholder="Example: 500"
+  >
+
+  <label>Selling price (₹ per kg)</label>
+
+  <input
+    type="number"
+    id="sellingPrice"
+    placeholder="Example: 30"
+  >
+
+  <label>Total production cost (₹)</label>
+
+  <input
+    type="number"
+    id="productionCost"
+    placeholder="Example: 8000"
+  >
+
+  <button type="button" id="profitBtn">
+    💰 Calculate Profit
+  </button>
+
+  <div
+    id="profitResult"
+    class="recommendation"
+    style="margin-top:15px;"
+  ></div>
+</div>
 
   <!-- FARM DASHBOARD -->
   <div class="card">
