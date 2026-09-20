@@ -807,7 +807,41 @@ profitBtn.addEventListener("click", function() {
   }
 
 });
+document.getElementById("askAIButton").addEventListener("click", function() {
 
+  const question = document
+    .getElementById("farmerQuestion")
+    .value
+    .toLowerCase();
+
+  const answer = document.getElementById("aiAnswer");
+
+  if (question.includes("water") || question.includes("irrigation")) {
+    answer.innerHTML =
+      "💧 <strong>Recommendation:</strong> Check soil moisture before irrigation. Avoid overwatering.";
+  }
+
+  else if (question.includes("tomato")) {
+    answer.innerHTML =
+      "🍅 <strong>Tomato:</strong> Provide good sunlight, regular irrigation and well-drained soil.";
+  }
+
+  else if (question.includes("fertilizer")) {
+    answer.innerHTML =
+      "🌱 <strong>Fertilizer:</strong> Use fertilizer according to the crop and soil condition. Avoid excessive use.";
+  }
+
+  else if (question.includes("soil")) {
+    answer.innerHTML =
+      "🌾 <strong>Soil:</strong> Check soil moisture, pH and nutrients before selecting a crop.";
+  }
+
+  else {
+    answer.innerHTML =
+      "🤖 <strong>FarmPrice AI:</strong> Please ask about irrigation, soil, tomato, fertilizer or crops.";
+  }
+
+});
 </script>
 
 </body>
