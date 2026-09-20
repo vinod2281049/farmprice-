@@ -807,40 +807,116 @@ profitBtn.addEventListener("click", function() {
   }
 
 });
-document.getElementById("askAIButton").addEventListener("click", function() {
+document.getElementById("askAIButton").addEventListener("click", function () {
 
-  const question = document
-    .getElementById("farmerQuestion")
-    .value
-    .toLowerCase();
+    const question = document
+        .getElementById("farmerQuestion")
+        .value
+        .toLowerCase()
+        .trim();
 
-  const answer = document.getElementById("aiAnswer");
+    const answer = document.getElementById("aiAnswer");
 
-  if (question.includes("water") || question.includes("irrigation")) {
-    answer.innerHTML =
-      "💧 <strong>Recommendation:</strong> Check soil moisture before irrigation. Avoid overwatering.";
-  }
+    if (question === "") {
+        answer.innerHTML = "⚠️ Please enter a farming question.";
+    }
 
-  else if (question.includes("tomato")) {
-    answer.innerHTML =
-      "🍅 <strong>Tomato:</strong> Provide good sunlight, regular irrigation and well-drained soil.";
-  }
+    else if (
+        question.includes("water") ||
+        question.includes("irrigation") ||
+        question.includes("dry") ||
+        question.includes("moisture")
+    ) {
+        answer.innerHTML =
+            "💧 <strong>Irrigation Recommendation:</strong><br><br>" +
+            "Check soil moisture before irrigation. " +
+            "If the soil is dry, water the crop properly. " +
+            "Avoid overwatering.";
+    }
 
-  else if (question.includes("fertilizer")) {
-    answer.innerHTML =
-      "🌱 <strong>Fertilizer:</strong> Use fertilizer according to the crop and soil condition. Avoid excessive use.";
-  }
+    else if (
+        question.includes("tomato") ||
+        question.includes("tomatoes")
+    ) {
+        answer.innerHTML =
+            "🍅 <strong>Tomato Recommendation:</strong><br><br>" +
+            "Tomatoes need good sunlight, well-drained soil and regular watering. " +
+            "Use suitable fertilizer and monitor the plants for pests and diseases.";
+    }
 
-  else if (question.includes("soil")) {
-    answer.innerHTML =
-      "🌾 <strong>Soil:</strong> Check soil moisture, pH and nutrients before selecting a crop.";
-  }
+    else if (
+        question.includes("fertilizer") ||
+        question.includes("fertiliser") ||
+        question.includes("nutrient")
+    ) {
+        answer.innerHTML =
+            "🌱 <strong>Fertilizer Recommendation:</strong><br><br>" +
+            "Test the soil before applying fertilizer. " +
+            "Use the required nutrients according to the crop and soil condition. " +
+            "Avoid excessive fertilizer.";
+    }
 
-  else {
-    answer.innerHTML =
-      "🤖 <strong>FarmPrice AI:</strong> Please ask about irrigation, soil, tomato, fertilizer or crops.";
-  }
+    else if (
+        question.includes("soil") ||
+        question.includes("ph") ||
+        question.includes("land")
+    ) {
+        answer.innerHTML =
+            "🌾 <strong>Soil Recommendation:</strong><br><br>" +
+            "Check soil moisture, pH and nutrients before selecting a crop. " +
+            "Good soil preparation can improve crop growth.";
+    }
 
+    else if (
+        question.includes("pest") ||
+        question.includes("insect") ||
+        question.includes("bug")
+    ) {
+        answer.innerHTML =
+            "🐛 <strong>Pest Recommendation:</strong><br><br>" +
+            "Inspect the crop regularly for insects and damaged leaves. " +
+            "Use suitable pest-control methods recommended for your crop.";
+    }
+
+    else if (
+        question.includes("crop") ||
+        question.includes("plant") ||
+        question.includes("grow")
+    ) {
+        answer.innerHTML =
+            "🌱 <strong>Crop Recommendation:</strong><br><br>" +
+            "Choose a crop based on soil type, water availability, season " +
+            "and local market demand.";
+    }
+
+    else if (
+        question.includes("price") ||
+        question.includes("market") ||
+        question.includes("sell")
+    ) {
+        answer.innerHTML =
+            "💰 <strong>Market Recommendation:</strong><br><br>" +
+            "Check the latest local market price before selling your produce. " +
+            "Compare prices from nearby markets to make an informed decision.";
+    }
+
+    else if (
+        question.includes("weather") ||
+        question.includes("rain") ||
+        question.includes("temperature")
+    ) {
+        answer.innerHTML =
+            "🌦️ <strong>Weather Recommendation:</strong><br><br>" +
+            "Check the weather forecast before irrigation, spraying or harvesting. " +
+            "Avoid spraying during heavy rain or strong wind.";
+    }
+
+    else {
+        answer.innerHTML =
+            "🤖 <strong>FarmPrice AI:</strong><br><br>" +
+            "I can help with irrigation, soil, tomato, fertilizer, crops, " +
+            "pests, market prices and weather-related farming questions.";
+    }
 });
 </script>
 
