@@ -718,6 +718,71 @@ updateRecommendation();
 
 drawChart();
 
+/* =========================
+   CROP PROFIT CALCULATOR
+========================= */
+
+const cropQuantity =
+  document.getElementById("cropQuantity");
+
+const sellingPrice =
+  document.getElementById("sellingPrice");
+
+const productionCost =
+  document.getElementById("productionCost");
+
+const profitBtn =
+  document.getElementById("profitBtn");
+
+const profitResult =
+  document.getElementById("profitResult");
+
+
+profitBtn.addEventListener("click", function() {
+
+  const quantity = Number(cropQuantity.value);
+  const price = Number(sellingPrice.value);
+  const cost = Number(productionCost.value);
+
+  if (quantity <= 0 || price <= 0 || cost < 0) {
+
+    profitResult.innerHTML =
+      "⚠️ Please enter valid values.";
+
+    return;
+  }
+
+  const income = quantity * price;
+  const profit = income - cost;
+
+  if (profit > 0) {
+
+    profitResult.innerHTML =
+      "🟢 <strong>Estimated Profit: ₹" +
+      profit.toLocaleString() +
+      "</strong><br><br>" +
+      "💵 Expected income: ₹" +
+      income.toLocaleString();
+
+  } else if (profit === 0) {
+
+    profitResult.innerHTML =
+      "🟡 <strong>No profit or loss.</strong><br>" +
+      "💵 Expected income: ₹" +
+      income.toLocaleString();
+
+  } else {
+
+    profitResult.innerHTML =
+      "🔴 <strong>Estimated Loss: ₹" +
+      Math.abs(profit).toLocaleString() +
+      "</strong><br><br>" +
+      "💵 Expected income: ₹" +
+      income.toLocaleString();
+  }
+
+});
+
 </script>
 
 </body>
